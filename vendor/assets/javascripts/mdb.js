@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB FREE: 4.2.0
+ * Version: MDB FREE: 4.3.2
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -5150,10 +5150,8 @@ $(function () {
 
 //Initialization
 Waves.attach('.btn, .btn-floating', ['waves-light']);
-Waves.attach('.view .mask', ['waves-light']);
 Waves.attach('.waves-light', ['waves-light']);
-Waves.attach('.navbar-nav a, .nav-icons li a, .navbar form, .nav-tabs .nav-item', ['waves-light']);
-Waves.attach('.navbar-brand', ['waves-light']);
+Waves.attach('.navbar-nav a:not(.navbar-brand), .nav-icons li a, .navbar form, .nav-tabs .nav-item', ['waves-light']);
 Waves.attach('.pager li a', ['waves-light']);
 Waves.attach('.pagination .page-item .page-link', ['waves-effect']);
 Waves.init();/* FORMS */
@@ -5313,4 +5311,29 @@ Waves.init();/* FORMS */
 
     }); // End of $(document).ready
 
-}(jQuery));
+}(jQuery));/*
+    Enhanced Bootstrap Modals
+    https://mdbootstrap.com
+    office@mdbootstrap.com
+*/
+
+$('body').on('shown.bs.modal', '.modal', function() {
+    if($('.modal-backdrop').length) {
+    } else {
+
+        $modal_dialog = $(this).children('.modal-dialog')
+
+        if($modal_dialog.hasClass('modal-side')) {
+            $(this).addClass('modal-scrolling');
+            $('body').addClass('scrollable');
+        }
+
+        if($modal_dialog.hasClass('modal-frame')) {
+            $(this).addClass('modal-content-clickable');
+            $('body').addClass('scrollable');
+        }
+    }
+});
+$('body').on('hidden.bs.modal', '.modal', function() {
+    $('body').removeClass('scrollable');
+});
